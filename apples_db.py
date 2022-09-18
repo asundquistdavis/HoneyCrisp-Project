@@ -15,7 +15,7 @@ def construct_db():
         __tablename__ = 'phrase'
         id = Column(Integer, primary_key=True)
         phrase = Column(String(255))
-        playername = Column(String(255))
+        user_id = Column(Integer, ForeignKey('user.id'))
         date = Column(Date, default=d.today())
 
     class answer(Base):
@@ -23,9 +23,14 @@ def construct_db():
         id = Column(Integer, primary_key=True)
         phrase_id = Column(Integer, ForeignKey('phrase.id'), nullable=False)
         answer = Column(String(255))
-        playername = Column(String(255))
+        user_id = Column(Integer, ForeignKey('user.id'))
         votes = Column(Integer, default=0)
         date = Column(Date, default=d.today())
+
+    class phrase(Base):
+        __tablename__ = 'user'
+        id = Column(Integer, primary_key=True)
+        user = Column(String(255))
 
     Base.metadata.create_all(engine)
 
