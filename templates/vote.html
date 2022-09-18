@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Vote on Answer
+{% endblock %}
+
+{% block content %}
+<h2>Pick the best answer to the following phrase:</h2>
+<h3>{{ phrase.phrase }}</h3>
+
+<form action="/vote" method="post">
+    {% for answer in answers %}
+    <div class="form-check">
+        <input class="form-radio-input" type="radio" name="answer_id" value="{{ answer.id}}" id="flexRadioDefault">
+        <label class="form-radio-label" for="flexRadioDefault">{{ answer.answer }}, {{ answer.votes }}</label>
+    </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-active">Vote</button>
+    <input type="text" name="phrase_id" value={{phrase.id}} hidden="true"/>
+</form>
+{% endblock %}
