@@ -12,9 +12,8 @@ def index():
 @app.route('/enter', methods=['GET', 'POST'])
 def enter():
     if request.method == 'POST':
-        playername = request.form['playername']
         phrase = request.form['phrase']
-        add_to_db('phrase', phrase=phrase, playername=playername)
+        add_to_db('phrase', phrase=phrase)
         return redirect('/enter')
     else:
         phrases = query_db('phrase')
